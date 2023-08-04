@@ -115,6 +115,9 @@ struct Network
     alignas(CacheLineSize) static thread_local Buffer buffer;
 #endif
 
+    constexpr IndexType HalfTFDimensions = TransformedFeatureDimensions / 2;
+    dbg_activations(transformedFeatures, HalfTFDimensions);
+    dbg_activations(transformedFeatures + HalfTFDimensions, HalfTFDimensions);
     fc_0.propagate(transformedFeatures, buffer.fc_0_out);
     ac_sqr_0.propagate(buffer.fc_0_out, buffer.ac_sqr_0_out);
     ac_0.propagate(buffer.fc_0_out, buffer.ac_0_out);
